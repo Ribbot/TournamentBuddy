@@ -22,7 +22,7 @@ namespace TournamentBuddy.Views
 		{
 			InitializeComponent ();
 
-            GetMatches();
+            App.Database.DeleteAll();
         }
 
         async void GetMatches()
@@ -33,20 +33,13 @@ namespace TournamentBuddy.Views
             listView.ItemsSource = matchCollection;
         }        
 
-        void Retrieve_Clicked(object sender, EventArgs e)
-        {
-            GetMatches();
-        }
-
-        async void Delete_Clicked(object sender, EventArgs e)
-        {
-            await App.Database.DeleteAll();
-        }
-
         void Handle_AgeSelectedIndexChanged(object sender, System.EventArgs e)
         {
-            //App.Database.DeleteList(matchList);
-            App.Database.ScrapeMatches(agePicker.SelectedItem.ToString());
+            if (matchList != null)
+            {
+                App.Database.DeleteList(matchList);
+            }
+
             GetMatches();
         }
     }

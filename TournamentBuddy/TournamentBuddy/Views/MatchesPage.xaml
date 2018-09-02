@@ -5,8 +5,6 @@
              >
 
     <StackLayout>
-        <Button Text="Retrieve" Clicked="Retrieve_Clicked"/>
-        <Button Text="Delete" Clicked="Delete_Clicked" />
 
         <Picker x:Name="agePicker" HorizontalOptions="FillAndExpand" SelectedIndexChanged="Handle_AgeSelectedIndexChanged">
             <Picker.Items>
