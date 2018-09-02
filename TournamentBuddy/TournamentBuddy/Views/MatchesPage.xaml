@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TournamentBuddy.Views.MatchesPage"
+             >
+
+    <StackLayout>
+        <Button Text="Retrieve" Clicked="Retrieve_Clicked"/>
+        <Button Text="Delete" Clicked="Delete_Clicked" />
+
+        <Picker x:Name="agePicker" HorizontalOptions="FillAndExpand" SelectedIndexChanged="Handle_AgeSelectedIndexChanged">
+            <Picker.Items>
+                <x:String>Boys U10 Cascade</x:String>
+                <x:String>Boys U10 Siskiyou</x:String>
+                <x:String>Boys U10 Sierra</x:String>
+            </Picker.Items>
+            <Picker.SelectedIndex>0</Picker.SelectedIndex>
+        </Picker>
+        
+        <ListView x:Name="listView" HasUnevenRows="true">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid RowSpacing="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="10" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Date}" Grid.Row="1" Grid.Column="0" />
+                            <Label Text="{Binding Time}" HorizontalOptions="CenterAndExpand" Grid.Row="1" Grid.Column="1" />
+                            <Label Text="{Binding Location}" Grid.Row="1" Grid.Column="2" />
+                            <Label Text="{Binding HomeTeam}" Grid.Row="2" Grid.Column="0" />
+                            <Label Text="{Binding Score}" FontSize="30" HorizontalOptions="CenterAndExpand" Grid.Row="2" Grid.Column="1" />
+                            <Label Text="{Binding AwayTeam}" Grid.Row="2" Grid.Column="2" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+</ContentPage>

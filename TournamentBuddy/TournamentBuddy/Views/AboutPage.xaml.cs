@@ -44,7 +44,7 @@ namespace TournamentBuddy.Views
 
         async void Delete_Clicked(object sender, EventArgs e)
         {
-            await App.Database.DeleteItems();
+            await App.Database.DeleteAll();
         }
     }
 }
