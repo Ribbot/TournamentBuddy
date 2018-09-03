@@ -12,6 +12,9 @@ namespace TournamentBuddy
     {
         readonly SQLiteAsyncConnection database;
 
+        HtmlWeb web = new HtmlWeb();
+        HtmlDocument[] docs = new HtmlDocument[3];
+
         public MatchDatabase(string dbpath)
         {
             database = new SQLiteAsyncConnection(dbpath);
@@ -67,6 +70,7 @@ namespace TournamentBuddy
             }
         }
 
+
         private string AgeGroupToURL(string ageGroup)
         {
             string url = null;
@@ -89,11 +93,12 @@ namespace TournamentBuddy
             return url;
         }
 
+
         public void ScrapeMatches(string AgeGroup)
         {
             string url = AgeGroupToURL(AgeGroup);
 
-            var web = new HtmlWeb();
+            //var web = new HtmlWeb();
             var doc = web.Load(url);
 
             string ageGroup = doc.DocumentNode.SelectSingleNode("//*[@id=\"aspnetForm\"]/table/tr/td[2]/table/tr/td/div[1]/div/div[3]").InnerHtml;

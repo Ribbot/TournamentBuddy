@@ -23,23 +23,33 @@ namespace TournamentBuddy.Views
 			InitializeComponent ();
 
             App.Database.DeleteAll();
+
+            matchListView.RefreshCommand = new Command(() => {
+                RefreshList();
+                matchListView.IsRefreshing = false;
+            });
         }
 
         async void GetMatches()
-        {
-            App.Database.ScrapeMatches(agePicker.SelectedItem.ToString());
+        {            
             matchList = await App.Database.GetAgeGroupAsync(agePicker.SelectedItem.ToString());
             ObservableCollection<MatchItem> matchCollection = new ObservableCollection<MatchItem>(matchList);
-            listView.ItemsSource = matchCollection;
+            matchListView.ItemsSource = matchCollection;
         }        
 
         void Handle_AgeSelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            GetMatches();
+        }
+
+        private void RefreshList()
         {
             if (matchList != null)
             {
                 App.Database.DeleteList(matchList);
             }
 
+            App.Database.ScrapeMatches(agePicker.SelectedItem.ToString());
             GetMatches();
         }
     }

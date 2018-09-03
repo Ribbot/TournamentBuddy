@@ -15,7 +15,9 @@
             <Picker.SelectedIndex>0</Picker.SelectedIndex>
         </Picker>
         
-        <ListView x:Name="listView" HasUnevenRows="true">
+        <ListView x:Name="matchListView" 
+                  HasUnevenRows="true" 
+                  IsPullToRefreshEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
