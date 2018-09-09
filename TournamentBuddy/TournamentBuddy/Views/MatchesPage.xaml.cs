@@ -16,7 +16,8 @@ namespace TournamentBuddy.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MatchesPage : ContentPage
 	{
-        List<MatchItem> matchList;
+        //List<MatchItem> matchList;
+        ObservableCollection<MatchItem> matchCollection;
 
         public MatchesPage ()
 		{
@@ -31,9 +32,9 @@ namespace TournamentBuddy.Views
         }
 
         async void GetMatches()
-        {            
-            matchList = await App.Database.GetAgeGroupAsync(agePicker.SelectedItem.ToString());
-            ObservableCollection<MatchItem> matchCollection = new ObservableCollection<MatchItem>(matchList);
+        {
+            List<MatchItem> matchList = await App.Database.GetAgeGroupAsync(agePicker.SelectedItem.ToString());
+            matchCollection = new ObservableCollection<MatchItem>(matchList);
             matchListView.ItemsSource = matchCollection;
         }        
 
@@ -42,13 +43,9 @@ namespace TournamentBuddy.Views
             GetMatches();
         }
 
-        private void RefreshList()
-        {
-            if (matchList != null)
-            {
-                App.Database.DeleteList(matchList);
-            }
-
+        async private void RefreshList()
+        {            
+            await App.Database.DeleteAgeGroup(agePicker.SelectedItem.ToString());
             App.Database.ScrapeMatches(agePicker.SelectedItem.ToString());
             GetMatches();
         }

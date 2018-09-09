@@ -12,8 +12,8 @@ namespace TournamentBuddy
     {
         readonly SQLiteAsyncConnection database;
 
-        HtmlWeb web = new HtmlWeb();
-        HtmlDocument[] docs = new HtmlDocument[3];
+        //HtmlWeb web = new HtmlWeb();
+        //HtmlDocument[] docs = new HtmlDocument[3];
 
         public MatchDatabase(string dbpath)
         {
@@ -62,6 +62,11 @@ namespace TournamentBuddy
             return database.ExecuteAsync("DELETE FROM MatchItem");
         }
 
+        public Task<int> DeleteAgeGroup(string ageGroup)
+        {
+            return database.ExecuteAsync("DELETE FROM MatchItem WHERE AgeGroup = '" + ageGroup + "'");
+        }
+
         async public void DeleteList(List<MatchItem> matchList)
         {
             for (int i = 0; i < matchList.Count; i++)
@@ -98,7 +103,7 @@ namespace TournamentBuddy
         {
             string url = AgeGroupToURL(AgeGroup);
 
-            //var web = new HtmlWeb();
+            var web = new HtmlWeb();
             var doc = web.Load(url);
 
             string ageGroup = doc.DocumentNode.SelectSingleNode("//*[@id=\"aspnetForm\"]/table/tr/td[2]/table/tr/td/div[1]/div/div[3]").InnerHtml;
