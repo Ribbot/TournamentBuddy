@@ -12,9 +12,6 @@ namespace TournamentBuddy
     {
         readonly SQLiteAsyncConnection database;
 
-        //HtmlWeb web = new HtmlWeb();
-        //HtmlDocument[] docs = new HtmlDocument[3];
-
         public MatchDatabase(string dbpath)
         {
             database = new SQLiteAsyncConnection(dbpath);
@@ -92,6 +89,50 @@ namespace TournamentBuddy
 
                 case "Boys U10 Sierra":
                     url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747245&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U11 Cascade":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747246&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U11 Siskiyou":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747247&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U12 Cascade/Siskiyou":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747248&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U12 Sierra":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747249&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U13 Cascade":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747252&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U13 Siskiyou/Sierra":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747253&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U14 Boys U14":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747254&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U15 Cascade":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747255&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U15 Siskiyou/Sierra":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747256&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U16 Boys U16":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747257&ApplicationID=&print=true";
+                    break;
+
+                case "Boys U17 Boys U17":
+                    url = "http://events.gotsport.com/events/schedule.aspx?EventID=64302&GroupID=747258&ApplicationID=&print=true";
                     break;
             }
 

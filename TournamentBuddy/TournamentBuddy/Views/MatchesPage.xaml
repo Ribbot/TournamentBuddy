@@ -11,6 +11,17 @@
                 <x:String>Boys U10 Cascade</x:String>
                 <x:String>Boys U10 Siskiyou</x:String>
                 <x:String>Boys U10 Sierra</x:String>
+                <x:String>Boys U11 Cascade</x:String>
+                <x:String>Boys U11 Siskiyou</x:String>
+                <x:String>Boys U12 Cascade/Siskiyou</x:String>
+                <x:String>Boys U12 Sierra</x:String>
+                <x:String>Boys U13 Cascade</x:String>
+                <x:String>Boys U13 Siskiyou/Sierra</x:String>
+                <x:String>Boys U14 Boys U14</x:String>
+                <x:String>Boys U15 Cascade</x:String>
+                <x:String>Boys U15 Siskiyou/Sierra</x:String>
+                <x:String>Boys U16 Boys U16</x:String>
+                <x:String>Boys U17 Boys U17</x:String>
             </Picker.Items>
             <Picker.SelectedIndex>0</Picker.SelectedIndex>
         </Picker>
@@ -37,7 +48,15 @@
                             <Label Text="{Binding Time}" HorizontalOptions="CenterAndExpand" Grid.Row="1" Grid.Column="1" />
                             <Label Text="{Binding Location}" Grid.Row="1" Grid.Column="2" />
                             <Label Text="{Binding HomeTeam}" Grid.Row="2" Grid.Column="0" />
-                            <Label Text="{Binding Score}" FontSize="30" HorizontalOptions="CenterAndExpand" Grid.Row="2" Grid.Column="1" />
+                            <Label FontSize="30" HorizontalOptions="CenterAndExpand" Grid.Row="2" Grid.Column="1" >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding HomeScore}" />
+                                        <Span Text=" - " />
+                                        <Span Text="{Binding AwayScore}" />
+                                    </FormattedString>
+                                </Label.FormattedText> 
+                            </Label>
                             <Label Text="{Binding AwayTeam}" Grid.Row="2" Grid.Column="2" />
                         </Grid>
                     </ViewCell>
