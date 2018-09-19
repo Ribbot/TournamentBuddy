@@ -34,6 +34,12 @@ namespace TournamentBuddy.Views
         async void GetMatches()
         {
             List<MatchItem> matchList = await App.Database.GetAgeGroupAsync(agePicker.SelectedItem.ToString());
+            if (matchList.Count == 0)
+            {
+                App.Database.ScrapeMatches(agePicker.SelectedItem.ToString());
+                matchList = await App.Database.GetAgeGroupAsync(agePicker.SelectedItem.ToString());
+            }
+
             matchCollection = new ObservableCollection<MatchItem>(matchList);
             matchListView.ItemsSource = matchCollection;
         }        

@@ -49,6 +49,11 @@ namespace TournamentBuddy
             return database.Table<MatchItem>().Where(i => i.AgeGroup == ageGroup).ToListAsync();
         }
 
+        public Task<List<MatchItem>> GetTeamAsync(string team)
+        {
+            return database.Table<MatchItem>().Where(i => (i.HomeTeam == team) || (i.AwayTeam == team)).ToListAsync();
+        }
+
         public Task<int> DeleteItemAsync(MatchItem item)
         {
             return database.DeleteAsync(item);

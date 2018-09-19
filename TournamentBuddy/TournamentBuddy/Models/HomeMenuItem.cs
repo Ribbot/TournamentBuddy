@@ -6,8 +6,8 @@ namespace TournamentBuddy.Models
 {
     public enum MenuItemType
     {
-        Browse,
-        About
+        Matches,
+        Teams
     }
     public class HomeMenuItem
     {
