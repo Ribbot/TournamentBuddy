@@ -63,5 +63,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Button Text="Update Teampicker" x:Name="testButton" Clicked="testButton_Clicked"/>
     </StackLayout>
 </ContentPage>

@@ -12,6 +12,7 @@ namespace TournamentBuddy.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TeamsPage : ContentPage
 	{
+        //public bool updating;
 		public TeamsPage ()
 		{
 			InitializeComponent ();
@@ -42,7 +43,8 @@ namespace TournamentBuddy.Views
                 }
             }
 
-            teamPicker.SelectedIndex = 0;
+            //teamPicker.SelectedIndex = -1;
+            //updating = true;
             teamPicker.ItemsSource = teamList;
             //teamPicker.SelectedIndex = 0;
         }
@@ -55,13 +57,31 @@ namespace TournamentBuddy.Views
 
         void Handle_AgeSelectedIndexChanged(object sender, System.EventArgs e)
         {
+            teamPicker.SelectedIndex = -1;
+            //teamPicker.ItemsSource = null;
             GetTeams();
             //DisplayMatches();
         }
 
         void Handle_TeamSelectedIndexChanged(object sender, System.EventArgs e)
         {
-            DisplayMatches((sender as Picker).SelectedItem.ToString());
+            //if (teamPicker.SelectedItem.ToString() != null)
+            //{
+            if(teamPicker.SelectedIndex != -1)
+            {
+                DisplayMatches(teamPicker.SelectedItem.ToString());
+            }
+            else
+            {
+                matchListView.ItemsSource = null;
+            }
+            //}
+            //DisplayMatches((sender as Picker).SelectedItem.ToString());
+        }
+
+        private void testButton_Clicked(object sender, EventArgs e)
+        {
+            DisplayMatches(teamPicker.SelectedItem.ToString());
         }
     }
 }
