@@ -16,7 +16,6 @@ namespace TournamentBuddy.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MatchesPage : ContentPage
 	{
-        //List<MatchItem> matchList;
         ObservableCollection<MatchItem> matchCollection;
 
         public MatchesPage ()

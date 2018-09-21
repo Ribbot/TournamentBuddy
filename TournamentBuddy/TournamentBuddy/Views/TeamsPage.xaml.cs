@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,13 +12,16 @@ namespace TournamentBuddy.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TeamsPage : ContentPage
 	{
-        //public bool updating;
 		public TeamsPage ()
 		{
 			InitializeComponent ();
 
-            //GetTeams();
-		}
+            matchListView.RefreshCommand = new Command(() => {
+                matchListView.IsRefreshing = true;
+                RefreshList();
+                matchListView.IsRefreshing = false;
+            });
+        }
 
         async void GetTeams()
         {
@@ -43,10 +46,7 @@ namespace TournamentBuddy.Views
                 }
             }
 
-            //teamPicker.SelectedIndex = -1;
-            //updating = true;
             teamPicker.ItemsSource = teamList;
-            //teamPicker.SelectedIndex = 0;
         }
 
         async void DisplayMatches(string team)
@@ -58,15 +58,11 @@ namespace TournamentBuddy.Views
         void Handle_AgeSelectedIndexChanged(object sender, System.EventArgs e)
         {
             teamPicker.SelectedIndex = -1;
-            //teamPicker.ItemsSource = null;
             GetTeams();
-            //DisplayMatches();
         }
 
         void Handle_TeamSelectedIndexChanged(object sender, System.EventArgs e)
         {
-            //if (teamPicker.SelectedItem.ToString() != null)
-            //{
             if(teamPicker.SelectedIndex != -1)
             {
                 DisplayMatches(teamPicker.SelectedItem.ToString());
@@ -75,13 +71,43 @@ namespace TournamentBuddy.Views
             {
                 matchListView.ItemsSource = null;
             }
-            //}
-            //DisplayMatches((sender as Picker).SelectedItem.ToString());
         }
 
-        private void testButton_Clicked(object sender, EventArgs e)
+        /*private bool _isRefreshing = false;
+        public bool IsRefreshing
         {
-            DisplayMatches(teamPicker.SelectedItem.ToString());
+            get { return _isRefreshing; }
+            set
+            {
+                _isRefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }*/
+
+        async void RefreshList()
+        {
+            int selectedIndex = teamPicker.SelectedIndex;
+
+            await App.Database.DeleteAgeGroup(agePicker.SelectedItem.ToString());
+            App.Database.ScrapeMatches(agePicker.SelectedItem.ToString());
+            GetTeams();
+
+            teamPicker.SelectedIndex = selectedIndex;
         }
+
+        /*public ICommand RefreshCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    IsRefreshing = true;
+
+                    RefreshData();
+
+                    IsRefreshing = false;
+                });
+            }
+        }*/
     }
 }

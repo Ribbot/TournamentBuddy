@@ -28,7 +28,9 @@
 
         <ListView x:Name="matchListView" 
                   HasUnevenRows="true" 
-                  IsPullToRefreshEnabled="True">
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="RefreshCommand"
+                  IsRefreshing="{Binding IsRefreshing}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -64,6 +66,5 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Text="Update Teampicker" x:Name="testButton" Clicked="testButton_Clicked"/>
     </StackLayout>
 </ContentPage>
