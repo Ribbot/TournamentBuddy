@@ -17,21 +17,26 @@ namespace TournamentBuddy
             database = new SQLiteAsyncConnection(dbpath);
             database.CreateTableAsync<MatchItem>().Wait();
         }
+        
+        //Returns all MatchItems stored in the database
         public Task<List<MatchItem>> GetItemsAsync()
         {
             return database.Table<MatchItem>().ToListAsync();
         }
 
+        //Returns all MatchItems stored in the database
         public Task<List<MatchItem>> GetItemsNotDoneAsync()
         {
             return database.QueryAsync<MatchItem>("SELECT * FROM [MatchItem] WHERE [Done] = 0");
         }
 
+        //Returns the first MatchItem in the database with the given ID
         public Task<MatchItem> GetItemAsync(int id)
         {
             return database.Table<MatchItem>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
+        //Stores a single MatchItem in the database
         public Task<int> SaveItemAsync(MatchItem item)
         {
             if (item.Id != 0)
@@ -44,31 +49,37 @@ namespace TournamentBuddy
             }
         }
 
+        //Returns a list of MatchItems that are associated with the given age group
         public Task<List<MatchItem>> GetAgeGroupAsync(string ageGroup)
         {
             return database.Table<MatchItem>().Where(i => i.AgeGroup == ageGroup).ToListAsync();
         }
 
+        //Returns a list of MatchItems that are associated with the given team
         public Task<List<MatchItem>> GetTeamAsync(string team)
         {
             return database.Table<MatchItem>().Where(i => (i.HomeTeam == team) || (i.AwayTeam == team)).ToListAsync();
         }
 
+        //Deletes a given MatchItem from the database
         public Task<int> DeleteItemAsync(MatchItem item)
         {
             return database.DeleteAsync(item);
         }
 
+        //Deletes all MatchItems from the database
         public Task<int> DeleteAll()
         {
             return database.ExecuteAsync("DELETE FROM MatchItem");
         }
 
+        //Deletes all MatchItems assocated with the given age group from the database
         public Task<int> DeleteAgeGroup(string ageGroup)
         {
             return database.ExecuteAsync("DELETE FROM MatchItem WHERE AgeGroup = '" + ageGroup + "'");
         }
 
+        //Deletes a given list of MatchItems from the database
         async public void DeleteList(List<MatchItem> matchList)
         {
             for (int i = 0; i < matchList.Count; i++)
@@ -77,7 +88,7 @@ namespace TournamentBuddy
             }
         }
 
-
+        //Returns the URL for the webpage containing the match information of a given age group
         private string AgeGroupToURL(string ageGroup)
         {
             string url = null;
@@ -144,7 +155,8 @@ namespace TournamentBuddy
             return url;
         }
 
-
+        //Scrapes the match data from the webpage associated with a given age group. 
+        //Creates a new MatchItem for each match detected the webpage and stores it in the database.
         public void ScrapeMatches(string AgeGroup)
         {
             string url = AgeGroupToURL(AgeGroup);
