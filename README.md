@@ -8,7 +8,7 @@ Tournament Buddy is written in C# using the [Xamarin.Forms](https://docs.microso
 
 [HTML Agility Pack](https://html-agility-pack.net/) was used to scrape data from the Rogue Memorial Challenge webpage.
 
-Tournament Buddy stores the scraped data in a local [SQLite](https://www.sqlite.org/index.html) database.
+Tournament Buddy stores the data it scrapes in a local [SQLite](https://www.sqlite.org/index.html) database.
 
 # App Walkthrough
 Tournament Buddy contains two primary pages:
