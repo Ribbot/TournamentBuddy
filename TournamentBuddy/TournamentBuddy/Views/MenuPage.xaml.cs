@@ -18,7 +18,7 @@ namespace TournamentBuddy.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Matches, Title="Matches" },
+                new HomeMenuItem {Id = MenuItemType.Matches, Title="Age Groups" },
                 new HomeMenuItem {Id = MenuItemType.Teams, Title="Teams" }
             };
 

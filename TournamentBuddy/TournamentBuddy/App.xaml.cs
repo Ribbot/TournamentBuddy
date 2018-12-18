@@ -18,6 +18,7 @@ namespace TournamentBuddy
             MainPage = new MainPage();
         }
 
+        //Initialize SQlite database
         public static MatchDatabase Database
         {
             get
