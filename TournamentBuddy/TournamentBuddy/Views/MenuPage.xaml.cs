@@ -16,6 +16,7 @@ namespace TournamentBuddy.Views
         {
             InitializeComponent();
 
+            //Initialize menu entries
             menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Matches, Title="Age Groups" },
@@ -25,6 +26,8 @@ namespace TournamentBuddy.Views
             ListViewMenu.ItemsSource = menuItems;
 
             ListViewMenu.SelectedItem = menuItems[0];
+
+            //Navigate to chosen page when menu entry is selected
             ListViewMenu.ItemSelected += async (sender, e) =>
             {
                 if (e.SelectedItem == null)

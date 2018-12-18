@@ -23,6 +23,8 @@ namespace TournamentBuddy.Views
             });
         }
 
+        //Retrieves all teams associated with the selected age group from the database.
+        //Populates the team picker with the list of teams.
         async void GetTeams()
         {
             List<MatchItem> matchList = await App.Database.GetAgeGroupAsync(agePicker.SelectedItem.ToString());
@@ -49,18 +51,22 @@ namespace TournamentBuddy.Views
             teamPicker.ItemsSource = teamList;
         }
 
+        //Retrieves all matches associated with the selected team from the database.
+        //Displays the list of matches.
         async void DisplayMatches(string team)
         {
             List<MatchItem> matchList = await App.Database.GetTeamAsync(team);
             matchListView.ItemsSource = matchList;
         }
 
+        //Gets new team list when a new age group is selected
         void Handle_AgeSelectedIndexChanged(object sender, System.EventArgs e)
         {
             teamPicker.SelectedIndex = -1;
             GetTeams();
         }
 
+        //Gets new match list when a new team is selected
         void Handle_TeamSelectedIndexChanged(object sender, System.EventArgs e)
         {
             if(teamPicker.SelectedIndex != -1)
@@ -73,17 +79,8 @@ namespace TournamentBuddy.Views
             }
         }
 
-        /*private bool _isRefreshing = false;
-        public bool IsRefreshing
-        {
-            get { return _isRefreshing; }
-            set
-            {
-                _isRefreshing = value;
-                OnPropertyChanged(nameof(IsRefreshing));
-            }
-        }*/
-
+        //Removes any matches associated with the selected team from the database.
+        //Re-downloads the teams's web page, stores the matches in the database, and displays the matches.
         async void RefreshList()
         {
             int selectedIndex = teamPicker.SelectedIndex;
@@ -94,20 +91,5 @@ namespace TournamentBuddy.Views
 
             teamPicker.SelectedIndex = selectedIndex;
         }
-
-        /*public ICommand RefreshCommand
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    IsRefreshing = true;
-
-                    RefreshData();
-
-                    IsRefreshing = false;
-                });
-            }
-        }*/
     }
 }

@@ -29,9 +29,10 @@ namespace TournamentBuddy.Views
                 matchListView.IsRefreshing = false;
             });
         }
-	
-	//Retrieves all matches associated with the selected age group from the database.
-	//Display the list of matches.
+
+        //Retrieves all matches associated with the selected age group from the database.
+        //Scrapes data from webpage if age group's matches do not exist in database.
+        //Displays the list of matches.
         async void GetMatches()
         {
             List<MatchItem> matchList = await App.Database.GetAgeGroupAsync(agePicker.SelectedItem.ToString());
@@ -45,14 +46,14 @@ namespace TournamentBuddy.Views
             matchListView.ItemsSource = matchCollection;
         }        
 
-	//Retrieves and displays the matches associated with an age group whenever a new age group is selected
+	    //Retrieves and displays the matches associated with an age group whenever a new age group is selected
         void Handle_AgeSelectedIndexChanged(object sender, System.EventArgs e)
         {
             GetMatches();
         }
 
-	//Removes any matches associated with the selected age group from the database.
-	//Re-downloads the age group's web page, store the matches in the database, and display the matches.
+	    //Removes any matches associated with the selected age group from the database.
+	    //Re-downloads the age group's web page, stores the matches in the database, and displays the matches.
         async private void RefreshList()
         {            
             await App.Database.DeleteAgeGroup(agePicker.SelectedItem.ToString());

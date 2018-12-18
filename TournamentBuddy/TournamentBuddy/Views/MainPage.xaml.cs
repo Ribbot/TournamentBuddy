@@ -20,6 +20,7 @@ namespace TournamentBuddy.Views
             MenuPages.Add((int)MenuItemType.Matches, (NavigationPage)Detail);
         }
 
+        //Navigate to the page selected by the user in the master page list
         public async Task NavigateFromMenu(int id)
         {
             if (!MenuPages.ContainsKey(id))
